@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌦️ Weather Dashboard Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Weather Dashboard</span>
+                </div>
+                <div class="nav-right">
+                    <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="settings-btn" id="settingsBtn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Settings Modal -->
+        <div class="modal" id="settingsModal">
+            <div class="modal-content">
+                <span class="close" id="closeSettings">&times;</span>
+                <h2>Settings</h2>
+                <div class="setting-group">
+                    <label>Temperature Unit:</label>
+                    <select id="tempUnit">
+                        <option value="C">Celsius (°C)</option>
+                        <option value="F">Fahrenheit (°F)</option>
+                        <option value="K">Kelvin (K)</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label>Wind Speed Unit:</label>
+                    <select id="windUnit">
+                        <option value="m/s">m/s</option>
+                        <option value="km/h">km/h</option>
+                        <option value="mph">mph</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label>API Key:</label>
+                    <input type="password" id="apiKey" placeholder="Enter OpenWeatherMap API Key">
+                    <small>Get free API key from <a href="https://openweathermap.org/api" target="_blank">openweathermap.org</a></small>
+                </div>
+                <button class="btn btn-primary" id="saveSettings">Save Settings</button>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search for a city..." autocomplete="off">
+                <div class="search-results" id="searchResults"></div>
+            </div>
+            <button class="btn btn-primary" id="searchBtn">
+                <i class="fas fa-location-arrow"></i> Current Location
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Current Weather -->
+            <section class="current-weather" id="currentWeather">
+                <div class="weather-placeholder">
+                    <i class="fas fa-cloud"></i>
+                    <p>Search for a city or use your current location</p>
+                </div>
+            </section>
+
+            <!-- Hourly Forecast -->
+            <section class="hourly-forecast">
+                <h2>Hourly Forecast</h2>
+                <div class="hourly-container" id="hourlyContainer">
+                    <div class="placeholder">No data available</div>
+                </div>
+            </section>
+
+            <!-- 5-Day Forecast -->
+            <section class="forecast-section">
+                <h2>5-Day Forecast</h2>
+                <div class="forecast-grid" id="forecastGrid">
+                    <div class="placeholder">No data available</div>
+                </div>
+            </section>
+
+            <!-- Detailed Weather Info -->
+            <section class="details-section">
+                <h2>Detailed Weather Information</h2>
+                <div class="details-grid" id="detailsGrid">
+                    <div class="placeholder">No data available</div>
+                </div>
+            </section>
+
+            <!-- Weather Alerts -->
+            <section class="alerts-section" id="alertsSection" style="display: none;">
+                <h2><i class="fas fa-exclamation-triangle"></i> Weather Alerts</h2>
+                <div class="alerts-container" id="alertsContainer"></div>
+            </section>
+
+            <!-- Favorites -->
+            <section class="favorites-section">
+                <h2>Favorite Cities</h2>
+                <div class="favorites-grid" id="favoritesGrid">
+                    <p>No favorites yet. Click the heart icon on any weather card to add.</p>
+                </div>
+            </section>
+
+            <!-- Weather Chart -->
+            <section class="chart-section">
+                <h2>Temperature Trend</h2>
+                <canvas id="temperatureChart"></canvas>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Weather Dashboard. Data from <a href="https://openweathermap.org" target="_blank">OpenWeatherMap</a></p>
+            <p>Last updated: <span id="lastUpdated">--:--</span></p>
+        </footer>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loader" id="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
